@@ -8,6 +8,8 @@ import com.lyricsembedder.app.data.preferences.SettingsRepository
 import com.lyricsembedder.app.data.remote.AiLyricsService
 import com.lyricsembedder.app.data.remote.CoverArtService
 import com.lyricsembedder.app.data.remote.LrcLibService
+import com.lyricsembedder.app.data.remote.DeezerMetadataService
+import com.lyricsembedder.app.data.remote.ItunesMetadataService
 import com.lyricsembedder.app.data.remote.MusicBrainzService
 import com.lyricsembedder.app.data.repository.LyricsRepository
 import com.lyricsembedder.app.data.repository.MetadataRepository
@@ -46,12 +48,17 @@ class AppContainer(application: Application) {
     val notificationHelper = NotificationHelper(application)
 
     val musicBrainzService = MusicBrainzService(okHttpClient, json)
+    val itunesMetadataService = ItunesMetadataService(okHttpClient, json)
+    val deezerMetadataService = DeezerMetadataService(okHttpClient, json)
     val coverArtService = CoverArtService(okHttpClient, json)
     val lrcLibService = LrcLibService(okHttpClient, json)
     val aiLyricsService = AiLyricsService(okHttpClient, json)
 
     val metadataRepository = MetadataRepository(
+        context = application,
         musicBrainzService = musicBrainzService,
+        itunesMetadataService = itunesMetadataService,
+        deezerMetadataService = deezerMetadataService,
         coverArtService = coverArtService,
         tagManager = tagManager
     )

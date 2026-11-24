@@ -10,7 +10,10 @@ import com.lyricsembedder.app.data.model.AppSettings
 import com.lyricsembedder.app.data.model.AudioTrack
 import com.lyricsembedder.app.data.model.FolderSource
 import com.lyricsembedder.app.data.model.MbReleaseSummary
+import com.lyricsembedder.app.data.model.MetadataSource
+import com.lyricsembedder.app.data.model.ArtworkSourceMode
 import com.lyricsembedder.app.data.model.MusicFolder
+import com.lyricsembedder.app.data.model.ReleaseFormatFilter
 import com.lyricsembedder.app.data.model.TrackMappingItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +39,9 @@ data class MetadataUiState(
     val queryTracksOnDisc: String = "",
     val isSearchingMb: Boolean = false,
     val searchResults: List<MbReleaseSummary> = emptyList(),
+    val selectedSource: MetadataSource = MetadataSource.ALL,
+    val formatFilter: ReleaseFormatFilter = ReleaseFormatFilter.ALL,
+    val isLoadingVariants: Boolean = false,
     val selectedReleaseId: String? = null,
     val isLoadingReleaseDetail: Boolean = false,
     val albumDraft: AlbumMetadataDraft = AlbumMetadataDraft(),
@@ -124,8 +130,8 @@ class MetadataViewModel(
                 queryAlbumArtist = firstTrack?.albumArtist?.ifBlank { firstTrack.artist }.orEmpty(),
                 queryAlbum = firstTrack?.album?.ifBlank { folder.displayName } ?: folder.displayName,
                 queryTrackCountOnAlbum = "",
-                queryDiscNumber = (firstTrack?.discNumber ?: 1).toString(),
-                queryTracksOnDisc = tracks.size.toString(),
+                queryDiscNumber = "",
+                queryTracksOnDisc = "",
                 searchResults = emptyList(),
                 selectedReleaseId = null,
                 albumDraft = AlbumMetadataDraft(),
@@ -180,6 +186,7 @@ class MetadataViewModel(
             val state = _uiState.value
             _uiState.update { it.copy(isSearchingMb = true, statusMessage = null) }
             val result = container.metadataRepository.searchReleases(
+                source = state.selectedSource,
                 albumArtist = state.queryAlbumArtist,
                 album = state.queryAlbum,
                 trackCountOnAlbum = state.queryTrackCountOnAlbum.toIntOrNull(),
@@ -202,6 +209,73 @@ class MetadataViewModel(
                     }
                 }
             )
+        }
+    }
+
+    fun setSelectedSource(source: MetadataSource) {
+        _uiState.update { it.copy(selectedSource = source) }
+    }
+
+    fun setFormatFilter(filter: ReleaseFormatFilter) {
+        _uiState.update { it.copy(formatFilter = filter) }
+    }
+
+    fun loadAllAlbumVariants() {
+        val state = _uiState.value
+        val rgId = state.albumDraft.releaseGroupId.ifBlank {
+            state.searchResults.firstOrNull { it.id == state.selectedReleaseId }?.releaseGroup?.id
+                ?: state.searchResults.firstOrNull()?.releaseGroup?.id
+                ?: ""
+        }
+        if (rgId.isBlank()) return
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoadingVariants = true) }
+            val result = container.metadataRepository.getAllVariantsByReleaseGroup(rgId)
+            result.fold(
+                onSuccess = { allVariants ->
+                    val merged = (state.searchResults + allVariants).distinctBy { it.id }
+                    _uiState.update {
+                        it.copy(
+                            searchResults = merged,
+                            isLoadingVariants = false,
+                            statusMessage = "Đã tải tất cả ${merged.size} phiên bản (variants) của album."
+                        )
+                    }
+                },
+                onFailure = { err ->
+                    _uiState.update {
+                        it.copy(
+                            isLoadingVariants = false,
+                            statusMessage = "Không tải được danh sách phiên bản: ${err.localizedMessage}"
+                        )
+                    }
+                }
+            )
+        }
+    }
+
+    fun adoptArtworkFromRelease(release: MbReleaseSummary) {
+        viewModelScope.launch {
+            val url = release.artworkPreviewUrl ?: container.metadataRepository.resolveArtworkForRelease(
+                releaseId = release.id,
+                artist = release.primaryArtist,
+                album = release.title
+            )
+            if (url != null) {
+                _uiState.update { state ->
+                    state.copy(
+                        albumDraft = state.albumDraft.copy(
+                            artworkUrl = url,
+                            artworkSourceMode = ArtworkSourceMode.REMOTE_SOURCE
+                        ),
+                        statusMessage = "Đã lấy ảnh bìa từ bản ${release.mediaFormatDisplay.ifBlank { release.title }}."
+                    )
+                }
+            } else {
+                _uiState.update {
+                    it.copy(statusMessage = "Phiên bản này chưa có ảnh bìa trên Cover Art Archive.")
+                }
+            }
         }
     }
 

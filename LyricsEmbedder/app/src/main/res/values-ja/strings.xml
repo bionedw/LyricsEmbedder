@@ -149,4 +149,20 @@
     <string name="filter_title_label">タイトルフィルター</string>
     <string name="filter_artist_label">アーティストフィルター</string>
     <string name="filter_album_label">アルバムフィルター</string>
+
+    <string name="metadata_artwork_source_title">アルバムアートワーク</string>
+    <string name="metadata_artwork_from_source">取得元から使用</string>
+    <string name="metadata_artwork_pick_local">端末から選択</string>
+    <string name="metadata_artwork_none">なし</string>
+    <string name="metadata_local_file_label">ファイル</string>
+    <string name="metadata_original_title_label">元のタイトル</string>
+
+    <string name="metadata_load_all_variants">すべてのバリアントを読み込む</string>
+    <string name="metadata_filter_all">すべて</string>
+    <string name="metadata_filter_digital">デジタル</string>
+    <string name="metadata_filter_cd">CD</string>
+    <string name="metadata_filter_vinyl">アナログ盤</string>
+    <string name="metadata_filter_other">その他</string>
+    <string name="metadata_use_this_cover">アートワーク使用</string>
+    <string name="metadata_source_label">取得元</string>
 </resources>

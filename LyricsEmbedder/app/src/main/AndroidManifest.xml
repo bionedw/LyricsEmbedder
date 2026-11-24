@@ -25,9 +25,12 @@
         android:name=".LyricsEmbedderApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LyricsEmbedder"
         android:usesCleartextTraffic="true"
@@ -42,12 +45,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
-            <!-- Poweramp Lyrics Plugin Request Intent -->
+        <!-- Poweramp Lyrics Plugin Receiver (discovers LyricsEmbedder as a Poweramp Lyrics provider) -->
+        <receiver
+            android:name=".data.local.PowerampLyricsReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.maxmpz.audioplayer.ACTION_NEED_LYRICS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </receiver>
     </application>
 </manifest>

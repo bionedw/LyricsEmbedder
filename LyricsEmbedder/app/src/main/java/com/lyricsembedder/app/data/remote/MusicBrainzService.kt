@@ -15,6 +15,10 @@ class MusicBrainzService(
     private val client: OkHttpClient,
     private val json: Json
 ) {
+    /**
+     * Searches MusicBrainz releases up to 100 results so all album variants
+     * (Digital Media, CD, Vinyl, Deluxe, regional editions) are returned.
+     */
     suspend fun searchReleases(
         albumArtist: String,
         album: String,
@@ -35,7 +39,7 @@ class MusicBrainzService(
             val url = "$BASE_URL/release".toHttpUrl().newBuilder()
                 .addQueryParameter("query", luceneQuery)
                 .addQueryParameter("fmt", "json")
-                .addQueryParameter("limit", "25")
+                .addQueryParameter("limit", "100")
                 .build()
 
             val request = Request.Builder()
@@ -54,6 +58,36 @@ class MusicBrainzService(
             }
         }
     }
+
+    /**
+     * Fetches ALL variants (Digital Media, CD, Vinyl, Deluxe, regional editions)
+     * belonging to the same MusicBrainz Release Group.
+     */
+    suspend fun getAllVariantsByReleaseGroup(releaseGroupId: String): Result<List<MbReleaseSummary>> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val url = "$BASE_URL/release".toHttpUrl().newBuilder()
+                    .addQueryParameter("release-group", releaseGroupId)
+                    .addQueryParameter("inc", "labels+media+release-groups+artist-credits")
+                    .addQueryParameter("limit", "100")
+                    .addQueryParameter("fmt", "json")
+                    .build()
+
+                val request = Request.Builder()
+                    .url(url)
+                    .header("User-Agent", USER_AGENT)
+                    .header("Accept", "application/json")
+                    .build()
+
+                client.newCall(request).execute().use { response ->
+                    if (!response.isSuccessful) {
+                        throw IOException("MusicBrainz variants lookup failed: HTTP ${response.code}")
+                    }
+                    val body = response.body?.string().orEmpty()
+                    json.decodeFromString<MbReleaseSearchResponse>(body).releases
+                }
+            }
+        }
 
     suspend fun getReleaseDetail(releaseId: String): Result<MbReleaseDetail> = withContext(Dispatchers.IO) {
         runCatching {

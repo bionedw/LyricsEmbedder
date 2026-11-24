@@ -9,6 +9,21 @@ data class MbReleaseSearchResponse(
     val releases: List<MbReleaseSummary> = emptyList()
 )
 
+enum class MetadataSource(val displayName: String) {
+    ALL("Tất cả / All"),
+    MUSICBRAINZ("MusicBrainz"),
+    ITUNES("iTunes / Apple Music"),
+    DEEZER("Deezer")
+}
+
+enum class ReleaseFormatFilter {
+    ALL,
+    DIGITAL,
+    CD,
+    VINYL,
+    OTHER
+}
+
 @Serializable
 data class MbReleaseSummary(
     val id: String,
@@ -16,13 +31,18 @@ data class MbReleaseSummary(
     val status: String? = null,
     val country: String? = null,
     val date: String? = null,
+    val disambiguation: String? = null,
     @SerialName("release-group")
     val releaseGroup: MbReleaseGroup? = null,
     @SerialName("artist-credit")
     val artistCredit: List<MbArtistCredit> = emptyList(),
     @SerialName("label-info")
     val labelInfo: List<MbLabelInfo> = emptyList(),
-    val media: List<MbMedium> = emptyList()
+    val media: List<MbMedium> = emptyList(),
+    @kotlinx.serialization.Transient
+    val source: MetadataSource = MetadataSource.MUSICBRAINZ,
+    @kotlinx.serialization.Transient
+    val artworkPreviewUrl: String? = null
 ) {
     val primaryArtist: String
         get() = artistCredit.joinToString("") { (it.name ?: it.artist?.name.orEmpty()) + it.joinphrase.orEmpty() }
@@ -43,6 +63,29 @@ data class MbReleaseSummary(
 
     val totalDiscs: Int
         get() = media.size.coerceAtLeast(1)
+
+    val totalTracks: Int
+        get() = media.sumOf { it.trackCount }
+
+    val mediaFormatDisplay: String
+        get() {
+            if (media.isEmpty()) return ""
+            val grouped = media.groupingBy { it.format?.ifBlank { "Unknown" } ?: "Unknown" }.eachCount()
+            return grouped.entries.joinToString(" + ") { (fmt, count) ->
+                if (count > 1) "${count}×$fmt" else fmt
+            }
+        }
+
+    val formatCategory: ReleaseFormatFilter
+        get() {
+            val fmt = mediaFormatDisplay.lowercase()
+            return when {
+                "digital" in fmt -> ReleaseFormatFilter.DIGITAL
+                "cd" in fmt || "sacd" in fmt -> ReleaseFormatFilter.CD
+                "vinyl" in fmt -> ReleaseFormatFilter.VINYL
+                else -> ReleaseFormatFilter.OTHER
+            }
+        }
 }
 
 @Serializable
@@ -52,6 +95,7 @@ data class MbReleaseDetail(
     val status: String? = null,
     val country: String? = null,
     val date: String? = null,
+    val disambiguation: String? = null,
     @SerialName("release-group")
     val releaseGroup: MbReleaseGroup? = null,
     @SerialName("artist-credit")
@@ -60,7 +104,9 @@ data class MbReleaseDetail(
     val labelInfo: List<MbLabelInfo> = emptyList(),
     val media: List<MbMedium> = emptyList(),
     val genres: List<MbGenre> = emptyList(),
-    val tags: List<MbTag> = emptyList()
+    val tags: List<MbTag> = emptyList(),
+    @kotlinx.serialization.Transient
+    val directArtworkUrl: String? = null
 ) {
     val primaryArtist: String
         get() = artistCredit.joinToString("") { (it.name ?: it.artist?.name.orEmpty()) + it.joinphrase.orEmpty() }
@@ -151,12 +197,18 @@ data class MbTag(
     val count: Int = 0
 )
 
-/**
- * Editable album metadata model matching the MusicBee-style preview panel.
- */
+enum class ArtworkSourceMode {
+    REMOTE_SOURCE,
+    LOCAL_IMAGE,
+    NONE
+}
+
 data class AlbumMetadataDraft(
     val releaseId: String = "",
+    val releaseGroupId: String = "",
     val artworkUrl: String? = null,
+    val localArtworkUriString: String? = null,
+    val artworkSourceMode: ArtworkSourceMode = ArtworkSourceMode.REMOTE_SOURCE,
     val applyAlbumArtist: Boolean = true,
     val albumArtist: String = "",
     val applyComposer: Boolean = false,
@@ -174,9 +226,6 @@ data class AlbumMetadataDraft(
     val genre: String = ""
 )
 
-/**
- * 1-to-1 mapping row between a fetched MusicBrainz track and a local audio file.
- */
 data class TrackMappingItem(
     val included: Boolean = true,
     val trackNumber: Int,

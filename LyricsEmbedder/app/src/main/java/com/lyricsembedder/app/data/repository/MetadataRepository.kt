@@ -1,36 +1,63 @@
 package com.lyricsembedder.app.data.repository
 
+import android.content.Context
 import android.net.Uri
 import com.lyricsembedder.app.data.local.AudioTagManager
 import com.lyricsembedder.app.data.model.AlbumMetadataDraft
 import com.lyricsembedder.app.data.model.AppSettings
+import com.lyricsembedder.app.data.model.ArtworkSourceMode
 import com.lyricsembedder.app.data.model.AudioTrack
 import com.lyricsembedder.app.data.model.MbReleaseDetail
 import com.lyricsembedder.app.data.model.MbReleaseSummary
+import com.lyricsembedder.app.data.model.MetadataSource
 import com.lyricsembedder.app.data.model.TrackMappingItem
 import com.lyricsembedder.app.data.remote.CoverArtService
+import com.lyricsembedder.app.data.remote.DeezerMetadataService
+import com.lyricsembedder.app.data.remote.ItunesMetadataService
 import com.lyricsembedder.app.data.remote.MusicBrainzService
 import com.lyricsembedder.app.util.TrackOrderHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MetadataRepository(
+    private val context: Context,
     private val musicBrainzService: MusicBrainzService,
+    private val itunesMetadataService: ItunesMetadataService,
+    private val deezerMetadataService: DeezerMetadataService,
     private val coverArtService: CoverArtService,
     private val tagManager: AudioTagManager
 ) {
     suspend fun searchReleases(
+        source: MetadataSource,
         albumArtist: String,
         album: String,
         trackCountOnAlbum: Int?,
         discNumber: Int?,
         tracksOnDisc: Int?
     ): Result<List<MbReleaseSummary>> {
-        return musicBrainzService.searchReleases(
-            albumArtist = albumArtist,
-            album = album,
-            trackCountOnAlbum = trackCountOnAlbum,
-            discNumber = discNumber,
-            tracksOnDisc = tracksOnDisc
-        )
+        return when (source) {
+            MetadataSource.MUSICBRAINZ -> musicBrainzService.searchReleases(
+                albumArtist, album, trackCountOnAlbum, discNumber, tracksOnDisc
+            )
+            MetadataSource.ITUNES -> itunesMetadataService.searchAlbums(albumArtist, album)
+            MetadataSource.DEEZER -> deezerMetadataService.searchAlbums(albumArtist, album)
+            MetadataSource.ALL -> runCatching {
+                val combined = mutableListOf<MbReleaseSummary>()
+                itunesMetadataService.searchAlbums(albumArtist, album).getOrNull()?.let { combined += it }
+                deezerMetadataService.searchAlbums(albumArtist, album).getOrNull()?.let { combined += it }
+                musicBrainzService.searchReleases(albumArtist, album, trackCountOnAlbum, discNumber, tracksOnDisc)
+                    .getOrNull()?.let { combined += it }
+                combined
+            }
+        }
+    }
+
+    suspend fun getAllVariantsByReleaseGroup(releaseGroupId: String): Result<List<MbReleaseSummary>> {
+        return musicBrainzService.getAllVariantsByReleaseGroup(releaseGroupId)
+    }
+
+    suspend fun resolveArtworkForRelease(releaseId: String, artist: String, album: String): String? {
+        return coverArtService.resolveArtworkUrl(releaseId, artist, album)
     }
 
     suspend fun loadReleaseAndMapping(
@@ -38,10 +65,14 @@ class MetadataRepository(
         discNumber: Int,
         localTracks: List<AudioTrack>
     ): Result<Pair<AlbumMetadataDraft, List<TrackMappingItem>>> {
-        val detailResult = musicBrainzService.getReleaseDetail(releaseId)
+        val detailResult = when {
+            releaseId.startsWith("itunes:") -> itunesMetadataService.getAlbumDetail(releaseId)
+            releaseId.startsWith("deezer:") -> deezerMetadataService.getAlbumDetail(releaseId)
+            else -> musicBrainzService.getReleaseDetail(releaseId)
+        }
         val detail: MbReleaseDetail = detailResult.getOrElse { return Result.failure(it) }
 
-        val artworkUrl = coverArtService.resolveArtworkUrl(
+        val artworkUrl = detail.directArtworkUrl ?: coverArtService.resolveArtworkUrl(
             releaseId = detail.id,
             artist = detail.primaryArtist,
             album = detail.title
@@ -54,7 +85,9 @@ class MetadataRepository(
 
         val draft = AlbumMetadataDraft(
             releaseId = detail.id,
+            releaseGroupId = detail.releaseGroup?.id.orEmpty(),
             artworkUrl = artworkUrl,
+            artworkSourceMode = if (artworkUrl != null) ArtworkSourceMode.REMOTE_SOURCE else ArtworkSourceMode.NONE,
             albumArtist = detail.primaryArtist,
             album = detail.title,
             publisher = detail.primaryLabel,
@@ -81,7 +114,8 @@ class MetadataRepository(
 
     /**
      * Applies album & per-track metadata to all included tracks AND saves 1 artwork image file
-     * into the destination folder when configured.
+     * into the destination folder when configured. Supports both remote source artwork and
+     * user-picked local artwork images (MusicBee style).
      */
     suspend fun applyAlbumMetadata(
         folderUri: Uri,
@@ -90,7 +124,12 @@ class MetadataRepository(
         settings: AppSettings,
         onProgress: (completed: Int, total: Int, currentName: String) -> Unit
     ): Result<Int> {
-        val artworkBytes = draft.artworkUrl?.let { coverArtService.downloadArtworkBytes(it) }
+        val artworkBytes: ByteArray? = when (draft.artworkSourceMode) {
+            ArtworkSourceMode.REMOTE_SOURCE -> draft.artworkUrl?.let { coverArtService.downloadArtworkBytes(it) }
+            ArtworkSourceMode.LOCAL_IMAGE -> draft.localArtworkUriString?.let { readLocalArtworkBytes(it) }
+            ArtworkSourceMode.NONE -> null
+        }
+
         val activeMappings = mappings.filter { it.included }
         val total = activeMappings.size
         var successCount = 0
@@ -117,7 +156,6 @@ class MetadataRepository(
             }
         }
 
-        // Save 1 artwork image file into the destination folder
         if (artworkBytes != null && artworkBytes.isNotEmpty() && settings.saveArtworkCopyToFolder) {
             tagManager.saveArtworkToFolder(
                 folderUri = folderUri,
@@ -135,5 +173,12 @@ class MetadataRepository(
         settings: AppSettings
     ): Result<Unit> {
         return tagManager.writeTrackMetadata(track, settings, artworkBytes = null)
+    }
+
+    private suspend fun readLocalArtworkBytes(uriString: String): ByteArray? = withContext(Dispatchers.IO) {
+        runCatching {
+            val uri = Uri.parse(uriString)
+            context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+        }.getOrNull()
     }
 }

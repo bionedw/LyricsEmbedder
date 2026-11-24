@@ -149,4 +149,20 @@
     <string name="filter_title_label">Bộ lọc tiêu đề</string>
     <string name="filter_artist_label">Bộ lọc nghệ sĩ</string>
     <string name="filter_album_label">Bộ lọc album</string>
+
+    <string name="metadata_artwork_source_title">Ảnh bìa album</string>
+    <string name="metadata_artwork_from_source">Ảnh từ nguồn</string>
+    <string name="metadata_artwork_pick_local">Chọn ảnh từ máy</string>
+    <string name="metadata_artwork_none">Không dùng</string>
+    <string name="metadata_local_file_label">Tệp</string>
+    <string name="metadata_original_title_label">Tên gốc</string>
+
+    <string name="metadata_load_all_variants">Tải tất cả phiên bản (Variants)</string>
+    <string name="metadata_filter_all">Tất cả</string>
+    <string name="metadata_filter_digital">Digital</string>
+    <string name="metadata_filter_cd">CD</string>
+    <string name="metadata_filter_vinyl">Vinyl</string>
+    <string name="metadata_filter_other">Khác</string>
+    <string name="metadata_use_this_cover">Lấy ảnh bìa</string>
+    <string name="metadata_source_label">Nguồn</string>
 </resources>

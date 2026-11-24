@@ -7,10 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FolderCopy
 import androidx.compose.material.icons.filled.Lyrics
@@ -30,7 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,7 +47,6 @@ import com.lyricsembedder.app.ui.lyrics.LyricsTabScreen
 import com.lyricsembedder.app.ui.lyrics.LyricsViewModel
 import com.lyricsembedder.app.ui.metadata.MetadataTabScreen
 import com.lyricsembedder.app.ui.metadata.MetadataViewModel
-import com.lyricsembedder.app.ui.navigation.MainTab
 import com.lyricsembedder.app.ui.navigation.NavRoutes
 import com.lyricsembedder.app.ui.settings.FilterSettingsScreen
 import com.lyricsembedder.app.ui.settings.LyricsEditorSettingsScreen
@@ -58,6 +58,7 @@ import com.lyricsembedder.app.ui.settings.SettingsViewModel
 import com.lyricsembedder.app.ui.settings.ThemeSettingsScreen
 import com.lyricsembedder.app.ui.theme.LyricsEmbedderTheme
 import com.lyricsembedder.app.util.LocaleHelper
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -133,7 +134,8 @@ private fun LyricsEmbedderRoot(
     val metadataState by metadataViewModel.uiState.collectAsState()
     val lyricsState by lyricsViewModel.uiState.collectAsState()
 
-    var selectedTab by rememberSaveable { mutableStateOf(MainTab.METADATA) }
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 2 })
+    val coroutineScope = rememberCoroutineScope()
     var showAboutDialog by remember { mutableStateOf(false) }
 
     if (showAboutDialog) {
@@ -156,14 +158,18 @@ private fun LyricsEmbedderRoot(
                     if (!isExpandedScreen) {
                         NavigationBar {
                             NavigationBarItem(
-                                selected = selectedTab == MainTab.METADATA,
-                                onClick = { selectedTab = MainTab.METADATA },
+                                selected = pagerState.currentPage == 0,
+                                onClick = {
+                                    coroutineScope.launch { pagerState.animateScrollToPage(0) }
+                                },
                                 icon = { Icon(Icons.Filled.FolderCopy, contentDescription = null) },
                                 label = { Text(stringResource(R.string.tab_metadata)) }
                             )
                             NavigationBarItem(
-                                selected = selectedTab == MainTab.LYRICS,
-                                onClick = { selectedTab = MainTab.LYRICS },
+                                selected = pagerState.currentPage == 1,
+                                onClick = {
+                                    coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                                },
                                 icon = { Icon(Icons.Filled.Lyrics, contentDescription = null) },
                                 label = { Text(stringResource(R.string.tab_lyrics)) }
                             )
@@ -179,28 +185,37 @@ private fun LyricsEmbedderRoot(
                     if (isExpandedScreen) {
                         NavigationRail {
                             NavigationRailItem(
-                                selected = selectedTab == MainTab.METADATA,
-                                onClick = { selectedTab = MainTab.METADATA },
+                                selected = pagerState.currentPage == 0,
+                                onClick = {
+                                    coroutineScope.launch { pagerState.animateScrollToPage(0) }
+                                },
                                 icon = { Icon(Icons.Filled.FolderCopy, contentDescription = null) },
                                 label = { Text(stringResource(R.string.tab_metadata)) }
                             )
                             NavigationRailItem(
-                                selected = selectedTab == MainTab.LYRICS,
-                                onClick = { selectedTab = MainTab.LYRICS },
+                                selected = pagerState.currentPage == 1,
+                                onClick = {
+                                    coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                                },
                                 icon = { Icon(Icons.Filled.Lyrics, contentDescription = null) },
                                 label = { Text(stringResource(R.string.tab_lyrics)) }
                             )
                         }
                     }
 
-                    Box(modifier = Modifier.weight(1f)) {
-                        when (selectedTab) {
-                            MainTab.METADATA -> MetadataTabScreen(
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                    ) { page ->
+                        when (page) {
+                            0 -> MetadataTabScreen(
                                 state = metadataState,
                                 isExpandedScreen = isExpandedScreen,
                                 viewModel = metadataViewModel
                             )
-                            MainTab.LYRICS -> LyricsTabScreen(
+                            else -> LyricsTabScreen(
                                 state = lyricsState,
                                 viewModel = lyricsViewModel,
                                 onOpenEditor = { track ->

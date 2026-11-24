@@ -149,4 +149,20 @@
     <string name="filter_title_label">Title filter</string>
     <string name="filter_artist_label">Artist filter</string>
     <string name="filter_album_label">Album filter</string>
+
+    <string name="metadata_artwork_source_title">Cover artwork</string>
+    <string name="metadata_artwork_from_source">From source</string>
+    <string name="metadata_artwork_pick_local">Pick image</string>
+    <string name="metadata_artwork_none">None</string>
+    <string name="metadata_local_file_label">File</string>
+    <string name="metadata_original_title_label">Original title</string>
+
+    <string name="metadata_load_all_variants">Load all variants</string>
+    <string name="metadata_filter_all">All</string>
+    <string name="metadata_filter_digital">Digital</string>
+    <string name="metadata_filter_cd">CD</string>
+    <string name="metadata_filter_vinyl">Vinyl</string>
+    <string name="metadata_filter_other">Other</string>
+    <string name="metadata_use_this_cover">Use cover</string>
+    <string name="metadata_source_label">Source</string>
 </resources>

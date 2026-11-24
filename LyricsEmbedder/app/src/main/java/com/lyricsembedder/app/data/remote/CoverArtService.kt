@@ -15,26 +15,31 @@ class CoverArtService(
     private val json: Json
 ) {
     /**
-     * Returns Cover Art Archive front-500 URL if available, otherwise falls back to iTunes Search API.
+     * Prefers high-resolution Cover Art Archive front-1200 (ideal for Digital Media variants),
+     * falling back to front-500, then iTunes Store 1200x1200 artwork.
      */
     suspend fun resolveArtworkUrl(
         releaseId: String,
         artist: String,
         album: String
     ): String? = withContext(Dispatchers.IO) {
-        val caaUrl = "https://coverartarchive.org/release/$releaseId/front-500"
-        val caaExists = runCatching {
-            val req = Request.Builder()
-                .url(caaUrl)
-                .head()
-                .header("User-Agent", MusicBrainzService.USER_AGENT)
-                .build()
-            client.newCall(req).execute().use { it.isSuccessful }
-        }.getOrDefault(false)
+        val candidates = listOf(
+            "https://coverartarchive.org/release/$releaseId/front-1200",
+            "https://coverartarchive.org/release/$releaseId/front-500"
+        )
+        for (url in candidates) {
+            val exists = runCatching {
+                val req = Request.Builder()
+                    .url(url)
+                    .head()
+                    .header("User-Agent", MusicBrainzService.USER_AGENT)
+                    .build()
+                client.newCall(req).execute().use { it.isSuccessful }
+            }.getOrDefault(false)
+            if (exists) return@withContext url
+        }
 
-        if (caaExists) return@withContext caaUrl
-
-        // Fallback to iTunes Store artwork search
+        // Fallback to iTunes Store high-res artwork
         runCatching {
             val term = listOf(artist, album).filter { it.isNotBlank() }.joinToString(" ")
             if (term.isBlank()) return@runCatching null
@@ -50,7 +55,7 @@ class CoverArtService(
                 val root = json.parseToJsonElement(body).jsonObject
                 val first = root["results"]?.jsonArray?.firstOrNull()?.jsonObject
                 first?.get("artworkUrl100")?.jsonPrimitive?.content
-                    ?.replace("100x100bb", "600x600bb")
+                    ?.replace("100x100bb", "1200x1200bb")
             }
         }.getOrNull()
     }
