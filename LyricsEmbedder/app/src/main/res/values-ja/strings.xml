@@ -17,7 +17,7 @@
 
     <!-- About -->
     <string name="about_title">LyricsEmbedder について</string>
-    <string name="about_body">LyricsEmbedder v1.0.0\n\nスマートフォンおよびタブレット対応の Android アプリ（Material You、Android 5.0 以降対応）です。MusicBrainz と Cover Art Archive からアルバムのメタデータとアートワークを取得して音声ファイル（MP3、FLAC、M4A、OGG、WAV、OPUS など）へ直接埋め込み、LrcLib から同期・通常歌詞を取得して Poweramp とも連携できます。</string>
+    <string name="about_body">LyricsEmbedder v1.1.0\n\nスマートフォンおよびタブレット対応の Android アプリ（Material You、Android 5.0 以降対応）です。MusicBrainz と Cover Art Archive からアルバムのメタデータとアートワークを取得して音声ファイル（MP3、FLAC、M4A、OGG、WAV、OPUS など）へ直接埋め込み、LrcLib から同期・通常歌詞を取得して Poweramp とも連携できます。</string>
 
     <!-- Metadata Tab -->
     <string name="metadata_folders_title">音楽フォルダ</string>

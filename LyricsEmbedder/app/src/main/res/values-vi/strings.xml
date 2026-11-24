@@ -17,7 +17,7 @@
 
     <!-- About -->
     <string name="about_title">Giới thiệu LyricsEmbedder</string>
-    <string name="about_body">LyricsEmbedder v1.0.0\n\nỨng dụng Android (Material You, hỗ trợ từ Android 5.0 cho điện thoại và máy tính bảng) giúp lấy metadata album, ảnh bìa từ MusicBrainz &amp; Cover Art Archive, gắn trực tiếp vào tệp âm thanh (MP3, FLAC, M4A, OGG, WAV, OPUS...) và tải/nhúng lời bài hát đồng bộ từ LrcLib, hỗ trợ đồng bộ với Poweramp.</string>
+    <string name="about_body">LyricsEmbedder v1.1.0\n\nỨng dụng Android (Material You, hỗ trợ từ Android 5.0 cho điện thoại và máy tính bảng) giúp lấy metadata album, ảnh bìa từ MusicBrainz &amp; Cover Art Archive, gắn trực tiếp vào tệp âm thanh (MP3, FLAC, M4A, OGG, WAV, OPUS...) và tải/nhúng lời bài hát đồng bộ từ LrcLib, hỗ trợ đồng bộ với Poweramp.</string>
 
     <!-- Metadata Tab -->
     <string name="metadata_folders_title">Thư mục âm thanh</string>

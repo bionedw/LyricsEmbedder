@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -101,7 +103,7 @@ fun MetadataSearchDialog(
 
     Dialog(
         onDismissRequest = { if (!state.isApplying) viewModel.closeSearchDialog() },
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)
     ) {
         Surface(modifier = Modifier.fillMaxSize()) {
             Scaffold(
@@ -143,8 +145,10 @@ fun MetadataSearchDialog(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 48.dp),
+                        .padding(innerPadding)
+                        .navigationBarsPadding()
+                        .imePadding(),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 96.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     if (state.isApplying) {

@@ -4,7 +4,10 @@ import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Row
@@ -142,9 +145,25 @@ private fun LyricsEmbedderRoot(
         AboutDialog(onDismiss = { showAboutDialog = false })
     }
 
+    BackHandler(enabled = pagerState.currentPage != 0 && navController.currentDestination?.route == NavRoutes.HOME) {
+        coroutineScope.launch { pagerState.animateScrollToPage(0) }
+    }
+
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.HOME
+        startDestination = NavRoutes.HOME,
+        enterTransition = {
+            slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, tween(260))
+        },
+        exitTransition = {
+            slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, tween(260))
+        },
+        popEnterTransition = {
+            slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, tween(260))
+        },
+        popExitTransition = {
+            slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, tween(260))
+        }
     ) {
         composable(NavRoutes.HOME) {
             Scaffold(

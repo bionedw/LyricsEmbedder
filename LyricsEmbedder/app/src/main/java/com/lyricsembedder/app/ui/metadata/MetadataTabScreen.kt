@@ -1,6 +1,7 @@
 package com.lyricsembedder.app.ui.metadata
 
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -83,6 +84,11 @@ fun MetadataTabScreen(
             }
             viewModel.addCustomFolder(uri)
         }
+    }
+
+    // Native Android back swipe returns from folder detail to folder list instead of exiting
+    BackHandler(enabled = !isExpandedScreen && state.selectedFolder != null && !state.showSearchDialog) {
+        viewModel.clearSelectedFolder()
     }
 
     if (state.showSearchDialog) {

@@ -17,7 +17,7 @@
 
     <!-- About -->
     <string name="about_title">About LyricsEmbedder</string>
-    <string name="about_body">LyricsEmbedder v1.0.0\n\nAndroid app (Material You, Android 5.0+ for phones and tablets) for fetching album metadata and cover art from MusicBrainz &amp; Cover Art Archive, embedding directly into audio files (MP3, FLAC, M4A, OGG, WAV, OPUS...), and downloading synced/plain lyrics from LrcLib with Poweramp integration.</string>
+    <string name="about_body">LyricsEmbedder v1.1.0\n\nAndroid app (Material You, Android 5.0+ for phones and tablets) for fetching album metadata and cover art from MusicBrainz &amp; Cover Art Archive, embedding directly into audio files (MP3, FLAC, M4A, OGG, WAV, OPUS...), and downloading synced/plain lyrics from LrcLib with Poweramp integration.</string>
 
     <!-- Metadata Tab -->
     <string name="metadata_folders_title">Audio folders</string>
