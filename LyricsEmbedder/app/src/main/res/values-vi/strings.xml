@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LyricsEmbedder</string>
+    <string name="tab_metadata">Gắn Metadata</string>
+    <string name="tab_lyrics">Thêm Lyrics</string>
+    <string name="menu_about">Giới thiệu</string>
+    <string name="menu_settings">Cài đặt</string>
+    <string name="action_close">Đóng</string>
+    <string name="action_back">Quay lại</string>
+    <string name="action_cancel">Hủy</string>
+    <string name="action_save">Lưu</string>
+    <string name="action_apply">Áp dụng</string>
+    <string name="action_find">Tìm kiếm</string>
+    <string name="action_refresh">Quét lại</string>
+    <string name="action_add">Thêm</string>
+    <string name="action_delete">Xóa</string>
+
+    <!-- About -->
+    <string name="about_title">Giới thiệu LyricsEmbedder</string>
+    <string name="about_body">LyricsEmbedder v1.0.0\n\nỨng dụng Android (Material You, hỗ trợ từ Android 5.0 cho điện thoại và máy tính bảng) giúp lấy metadata album, ảnh bìa từ MusicBrainz &amp; Cover Art Archive, gắn trực tiếp vào tệp âm thanh (MP3, FLAC, M4A, OGG, WAV, OPUS...) và tải/nhúng lời bài hát đồng bộ từ LrcLib, hỗ trợ đồng bộ với Poweramp.</string>
+
+    <!-- Metadata Tab -->
+    <string name="metadata_folders_title">Thư mục âm thanh</string>
+    <string name="metadata_folders_subtitle">Chỉ quét các tệp hỗ trợ gắn metadata (FLAC, MP3, M4A, OGG, WAV…)</string>
+    <string name="metadata_pick_folder">Chọn thư mục</string>
+    <string name="metadata_empty_title">Chưa có thư mục nhạc nào được chọn</string>
+    <string name="metadata_empty_subtitle">Nhấn "Chọn thư mục" hoặc thêm thư mục trong Cài đặt &gt; Cài đặt lưu trữ lời bài hát.</string>
+    <string name="metadata_tablet_placeholder">Chọn một thư mục ở bên trái để xem tệp âm thanh và gắn metadata.</string>
+    <string name="metadata_tracks_count">%1$d bài</string>
+    <string name="metadata_folder_detail_subtitle">%1$d tệp âm thanh • %2$s</string>
+    <string name="metadata_source_poweramp">Poweramp</string>
+    <string name="metadata_source_custom">Tùy chỉnh</string>
+    <string name="metadata_set_folder">Set metadata for this folder</string>
+    <string name="metadata_set_file">Set metadata for this music file</string>
+    <string name="metadata_set_short">Set metadata</string>
+    <string name="metadata_edit_album">Sửa Album</string>
+    <string name="metadata_no_album">Chưa có album</string>
+    <string name="metadata_no_metadata_file">Chưa có metadata • %1$s</string>
+    <string name="metadata_edit_album_dialog_title">Sửa metadata album &amp; áp dụng toàn bộ</string>
+    <string name="metadata_apply_album_btn">Áp dụng cho album</string>
+    <string name="metadata_mb_results">Kết quả từ MusicBrainz (%1$d)</string>
+    <string name="metadata_mapping_header">Ánh xạ bài hát (Mapping) — Tự động lưu 1 tệp ảnh bìa vào thư mục đích</string>
+
+    <!-- Lyrics Tab -->
+    <string name="lyrics_filter_missing">Không có lời (%1$d)</string>
+    <string name="lyrics_filter_has">Đã có lời (%1$d)</string>
+    <string name="lyrics_filter_no_meta">Chưa có metadata (%1$d)</string>
+    <string name="lyrics_select_all_missing">Chọn tất cả chưa có lời</string>
+    <string name="lyrics_clear_selection">Bỏ chọn (%1$d)</string>
+    <string name="lyrics_no_meta_warning">Các tệp chưa có metadata không thể tải lời bài hát. Hãy gắn metadata ở tab Gắn Metadata trước.</string>
+    <string name="lyrics_empty_list">Không có bài hát nào trong mục này.</string>
+    <string name="lyrics_sheet_downloading">Đang tải lời: %1$d/%2$d</string>
+    <string name="lyrics_sheet_progress">Tiến trình tải (%1$d/%2$d)</string>
+    <string name="lyrics_sheet_idle">Tải lời bài hát (Đã chọn %1$d bài)</string>
+    <string name="lyrics_sheet_hint">Kéo lên để chọn nhạc cần tải hoặc xem tiến trình chi tiết</string>
+    <string name="lyrics_btn_download">Tải xuống</string>
+    <string name="lyrics_btn_stop">Dừng</string>
+    <string name="lyrics_sheet_details_title">Chi tiết tiến trình tải xuống</string>
+    <string name="lyrics_sheet_quick_pick">Chọn nhanh bài hát chưa có lời</string>
+    <string name="lyrics_select_all">Chọn tất cả</string>
+
+    <!-- Lyrics Editor -->
+    <string name="editor_title">Trình chỉnh sửa lời bài hát</string>
+    <string name="editor_timestamp_shift">Dịch dấu thời gian (±%1$dms)</string>
+    <string name="editor_placeholder">Nội dung lời bài hát (hỗ trợ định dạng LRC [mm:ss.xx])</string>
+    <string name="editor_ai_title">Chỉnh sửa lời bằng AI</string>
+    <string name="editor_ai_instruction_label">Yêu cầu xử lý</string>
+    <string name="editor_ai_default_instruction">Chuẩn hóa chính tả, viết hoa đầu dòng và giữ nguyên dấu thời gian LRC.</string>
+    <string name="editor_ai_run">Chạy AI</string>
+
+    <!-- Settings Main -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_theme_title">Chủ đề &amp; Ngôn ngữ</string>
+    <string name="settings_theme_subtitle">Tùy chỉnh giao diện và ngôn ngữ hiển thị của ứng dụng</string>
+    <string name="settings_request_title">Yêu cầu lời bài hát</string>
+    <string name="settings_request_subtitle">Cấu hình cách xử lý các yêu cầu lời bài hát từ Poweramp</string>
+    <string name="settings_storage_title">Cài đặt lưu trữ lời bài hát</string>
+    <string name="settings_storage_subtitle">Quản lý nơi và cách lưu các tệp lời bài hát.</string>
+    <string name="settings_provider_title">Nhà cung cấp lời bài hát</string>
+    <string name="settings_provider_subtitle">Cấu hình nguồn lấy lời bài hát.</string>
+    <string name="settings_editor_title">Trình chỉnh sửa lời bài hát</string>
+    <string name="settings_editor_subtitle">Tùy chỉnh trải nghiệm chỉnh sửa lời bài hát</string>
+    <string name="settings_filter_title">Bộ lọc</string>
+    <string name="settings_filter_subtitle">Những từ này sẽ bị xóa khỏi các trường tương ứng trong quá trình xử lý. Không phân biệt chữ hoa chữ thường. Hỗ trợ regex.</string>
+
+    <!-- Theme & Language Settings -->
+    <string name="theme_mode_header">Chế độ hiển thị</string>
+    <string name="theme_system">Theo thiết bị (Hệ thống)</string>
+    <string name="theme_light">Chế độ sáng</string>
+    <string name="theme_dark">Chế độ tối</string>
+    <string name="theme_dynamic_title">Màu động Material You</string>
+    <string name="theme_dynamic_desc_supported">Tự động đồng bộ bảng màu theo hình nền (Android 12+).</string>
+    <string name="theme_dynamic_desc_unsupported">Chỉ khả dụng từ Android 12 trở lên. Đang dùng bảng màu Material 3 mặc định.</string>
+    <string name="language_header">Ngôn ngữ ứng dụng</string>
+    <string name="language_system">Theo thiết bị</string>
+    <string name="language_en">English</string>
+    <string name="language_vi">Tiếng Việt</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Lyrics Request Settings -->
+    <string name="req_extended_title">Sử dụng tìm kiếm mở rộng</string>
+    <string name="req_extended_subtitle">Nếu không thể truy xuất lời bài hát chính xác, một tìm kiếm rộng hơn sẽ được thực hiện. Lưu ý: Điều này đôi khi có thể trả về lời bài hát không chính xác.</string>
+    <string name="req_notify_fail_title">Thông báo khi yêu cầu lời bài hát thất bại</string>
+    <string name="req_notify_fail_subtitle">Nhận thông báo khi yêu cầu lời bài hát trong nền bị lỗi.</string>
+    <string name="req_replace_notif_title">Thay thế thông báo trước đó</string>
+    <string name="req_replace_notif_subtitle">Các thông báo cũ hơn sẽ bị xóa và chỉ thông báo cuối cùng mới được hiển thị.</string>
+    <string name="req_preferred_type_title">Loại lời bài hát ưu tiên</string>
+    <string name="req_preferred_type_subtitle">Đặt tùy chọn mặc định cho lời bài hát có đồng bộ hoặc lời bài hát thường.</string>
+    <string name="req_type_synced">Đã đồng bộ</string>
+    <string name="req_type_text_only">Lời thường (Text-only)</string>
+    <string name="req_instrumental_title">Đánh dấu các bài hát không lời</string>
+    <string name="req_instrumental_subtitle">Đánh dấu các bài hát không lời là nhạc không lời. Poweramp sẽ không hỏi lại lời cho các bài hát này.</string>
+
+    <!-- Lyrics Storage Settings -->
+    <string name="storage_poweramp_title">Gửi lời bài hát đến Poweramp</string>
+    <string name="storage_poweramp_subtitle">Lời bài hát sẽ được lưu trong bộ nhớ đệm của Poweramp, cho phép cập nhật trực tiếp từ giao diện Poweramp.</string>
+    <string name="storage_file_title">Lưu lời bài hát dưới dạng tệp</string>
+    <string name="storage_file_subtitle">Lưu lời bài hát dưới dạng tệp văn bản (.lrc / .txt) trong cùng thư mục với tệp nhạc. Đảm bảo bạn chọn đúng thư mục bên dưới.</string>
+    <string name="storage_embed_title">Nhúng lời bài hát vào tệp</string>
+    <string name="storage_embed_subtitle">Nhúng lời bài hát trực tiếp vào tệp nhạc.</string>
+    <string name="storage_fix_meta_title">Sửa siêu dữ liệu bài hát</string>
+    <string name="storage_fix_meta_subtitle">Tự động cập nhật tên bài hát, nghệ sĩ và tên album khi lưu lời bài hát.</string>
+    <string name="storage_embed_art_title">Nhúng ảnh bìa vào tệp nhạc</string>
+    <string name="storage_embed_art_subtitle">Tự động nhúng ảnh bìa album trực tiếp vào tag của từng bài hát (ID3v2.3 + ID3v1).</string>
+    <string name="storage_copy_art_title">Lưu bản sao ảnh bìa vào thư mục album</string>
+    <string name="storage_copy_art_subtitle">Tải thêm 1 tệp ảnh artwork vào thư mục đích khi gắn metadata.</string>
+    <string name="storage_art_filename_label">Tên tệp ảnh bìa lưu trong thư mục</string>
+    <string name="storage_poweramp_folders">Thư mục nhạc từ Poweramp</string>
+    <string name="storage_custom_folders">Thư mục tùy chỉnh đã chọn</string>
+    <string name="storage_folders_empty">Chưa có thư mục nào. Nhấn nút + để chọn thư mục.</string>
+
+    <!-- Lyrics Provider Settings -->
+    <string name="provider_lrclib_header">URL API Lrclib</string>
+    <string name="provider_lrclib_info">Thêm các điểm cuối máy chủ Lrclib tùy chỉnh. Chỉ các API tương thích với Lrclib mới được hỗ trợ do sự khác biệt về định dạng phản hồi.</string>
+    <string name="provider_default_chip">API mặc định (%1$s)</string>
+    <string name="provider_add_url_label">Thêm URL API mới</string>
+    <string name="provider_active_title">API Lrclib đang hoạt động</string>
+    <string name="provider_active_subtitle">API máy chủ này sẽ được sử dụng cho tất cả các yêu cầu lời bài hát trong tương lai.</string>
+
+    <!-- Lyrics Editor Settings -->
+    <string name="editor_ai_info">Bạn cần thêm khóa API của riêng mình để sử dụng tính năng AI. Khóa của bạn chỉ được lưu trữ cục bộ trên thiết bị và không bao giờ bị thu thập hay chia sẻ.</string>
+    <string name="editor_api_key_label">Khóa API</string>
+    <string name="editor_selected_model">Mô hình đã chọn</string>
+    <string name="editor_step_title">Bước điều chỉnh dấu thời gian</string>
+    <string name="editor_step_subtitle">Khoảng thời gian để dịch chuyển dấu thời gian với mỗi lần nhấn nút + hoặc -.</string>
+
+    <!-- Filter Settings -->
+    <string name="filter_info">Những từ này sẽ bị xóa khỏi các trường tương ứng trong quá trình xử lý. Không phân biệt chữ hoa chữ thường. Hỗ trợ regex.</string>
+    <string name="filter_title_label">Bộ lọc tiêu đề</string>
+    <string name="filter_artist_label">Bộ lọc nghệ sĩ</string>
+    <string name="filter_album_label">Bộ lọc album</string>
+</resources>

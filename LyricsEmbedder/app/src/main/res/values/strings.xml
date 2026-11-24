@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LyricsEmbedder</string>
+    <string name="tab_metadata">Metadata</string>
+    <string name="tab_lyrics">Add Lyrics</string>
+    <string name="menu_about">About</string>
+    <string name="menu_settings">Settings</string>
+    <string name="action_close">Close</string>
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_find">Find</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_add">Add</string>
+    <string name="action_delete">Delete</string>
+
+    <!-- About -->
+    <string name="about_title">About LyricsEmbedder</string>
+    <string name="about_body">LyricsEmbedder v1.0.0\n\nAndroid app (Material You, Android 5.0+ for phones and tablets) for fetching album metadata and cover art from MusicBrainz &amp; Cover Art Archive, embedding directly into audio files (MP3, FLAC, M4A, OGG, WAV, OPUS...), and downloading synced/plain lyrics from LrcLib with Poweramp integration.</string>
+
+    <!-- Metadata Tab -->
+    <string name="metadata_folders_title">Audio folders</string>
+    <string name="metadata_folders_subtitle">Scans only taggable audio formats (FLAC, MP3, M4A, OGG, WAV…)</string>
+    <string name="metadata_pick_folder">Pick folder</string>
+    <string name="metadata_empty_title">No music folders selected yet</string>
+    <string name="metadata_empty_subtitle">Tap "Pick folder" or add folders in Settings &gt; Lyrics storage settings.</string>
+    <string name="metadata_tablet_placeholder">Select a folder on the left to inspect audio files and embed metadata.</string>
+    <string name="metadata_tracks_count">%1$d tracks</string>
+    <string name="metadata_folder_detail_subtitle">%1$d audio files • %2$s</string>
+    <string name="metadata_source_poweramp">Poweramp</string>
+    <string name="metadata_source_custom">Custom</string>
+    <string name="metadata_set_folder">Set metadata for this folder</string>
+    <string name="metadata_set_file">Set metadata for this music file</string>
+    <string name="metadata_set_short">Set metadata</string>
+    <string name="metadata_edit_album">Edit Album</string>
+    <string name="metadata_no_album">No album</string>
+    <string name="metadata_no_metadata_file">No metadata • %1$s</string>
+    <string name="metadata_edit_album_dialog_title">Edit album metadata &amp; apply to all tracks</string>
+    <string name="metadata_apply_album_btn">Apply to album</string>
+    <string name="metadata_mb_results">MusicBrainz results (%1$d)</string>
+    <string name="metadata_mapping_header">Track mapping — Also saves 1 cover artwork file to destination folder</string>
+
+    <!-- Lyrics Tab -->
+    <string name="lyrics_filter_missing">No lyrics (%1$d)</string>
+    <string name="lyrics_filter_has">Has lyrics (%1$d)</string>
+    <string name="lyrics_filter_no_meta">No metadata (%1$d)</string>
+    <string name="lyrics_select_all_missing">Select all missing</string>
+    <string name="lyrics_clear_selection">Clear (%1$d)</string>
+    <string name="lyrics_no_meta_warning">Files without metadata cannot fetch lyrics. Tag them in the Metadata tab first.</string>
+    <string name="lyrics_empty_list">No songs in this category.</string>
+    <string name="lyrics_sheet_downloading">Downloading lyrics: %1$d/%2$d</string>
+    <string name="lyrics_sheet_progress">Download progress (%1$d/%2$d)</string>
+    <string name="lyrics_sheet_idle">Download lyrics (%1$d selected)</string>
+    <string name="lyrics_sheet_hint">Drag up to pick songs or view detailed progress</string>
+    <string name="lyrics_btn_download">Download</string>
+    <string name="lyrics_btn_stop">Stop</string>
+    <string name="lyrics_sheet_details_title">Download progress details</string>
+    <string name="lyrics_sheet_quick_pick">Quick pick songs without lyrics</string>
+    <string name="lyrics_select_all">Select all</string>
+
+    <!-- Lyrics Editor -->
+    <string name="editor_title">Lyrics Editor</string>
+    <string name="editor_timestamp_shift">Shift timestamps (±%1$dms)</string>
+    <string name="editor_placeholder">Lyrics content (supports synced LRC [mm:ss.xx])</string>
+    <string name="editor_ai_title">AI Lyrics Assistant</string>
+    <string name="editor_ai_instruction_label">Instruction</string>
+    <string name="editor_ai_default_instruction">Fix spelling and capitalization while preserving all LRC timestamps.</string>
+    <string name="editor_ai_run">Run AI</string>
+
+    <!-- Settings Main -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme_title">Theme &amp; Language</string>
+    <string name="settings_theme_subtitle">Customize app appearance and display language</string>
+    <string name="settings_request_title">Lyrics requests</string>
+    <string name="settings_request_subtitle">Configure how lyrics requests from Poweramp are handled</string>
+    <string name="settings_storage_title">Lyrics storage settings</string>
+    <string name="settings_storage_subtitle">Manage where and how lyrics &amp; artwork files are saved</string>
+    <string name="settings_provider_title">Lyrics providers</string>
+    <string name="settings_provider_subtitle">Configure lyrics API sources</string>
+    <string name="settings_editor_title">Lyrics editor</string>
+    <string name="settings_editor_subtitle">Customize AI providers and timestamp step</string>
+    <string name="settings_filter_title">Filters</string>
+    <string name="settings_filter_subtitle">Words removed from fields during lookup. Case-insensitive. Regex supported.</string>
+
+    <!-- Theme & Language Settings -->
+    <string name="theme_mode_header">Display mode</string>
+    <string name="theme_system">Follow system</string>
+    <string name="theme_light">Light mode</string>
+    <string name="theme_dark">Dark mode</string>
+    <string name="theme_dynamic_title">Material You Dynamic Color</string>
+    <string name="theme_dynamic_desc_supported">Automatically match colors to your wallpaper (Android 12+).</string>
+    <string name="theme_dynamic_desc_unsupported">Requires Android 12+. Using default Material 3 palette.</string>
+    <string name="language_header">App language</string>
+    <string name="language_system">Follow system</string>
+    <string name="language_en">English</string>
+    <string name="language_vi">Tiếng Việt</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Lyrics Request Settings -->
+    <string name="req_extended_title">Use extended search</string>
+    <string name="req_extended_subtitle">If exact lyrics cannot be retrieved, a broader search will be performed. Note: this may occasionally return inaccurate lyrics.</string>
+    <string name="req_notify_fail_title">Notify on lyrics request failure</string>
+    <string name="req_notify_fail_subtitle">Show a notification when a background lyrics request fails.</string>
+    <string name="req_replace_notif_title">Replace previous notification</string>
+    <string name="req_replace_notif_subtitle">Older notifications will be cleared and only the latest one is shown.</string>
+    <string name="req_preferred_type_title">Preferred lyrics type</string>
+    <string name="req_preferred_type_subtitle">Set default preference for synced or plain text lyrics.</string>
+    <string name="req_type_synced">Synced</string>
+    <string name="req_type_text_only">Text-only</string>
+    <string name="req_instrumental_title">Mark instrumental tracks</string>
+    <string name="req_instrumental_subtitle">Mark instrumental tracks so Poweramp will not ask for their lyrics again.</string>
+
+    <!-- Lyrics Storage Settings -->
+    <string name="storage_poweramp_title">Send lyrics to Poweramp</string>
+    <string name="storage_poweramp_subtitle">Store lyrics in Poweramp cache for instant updates in Poweramp UI.</string>
+    <string name="storage_file_title">Save lyrics as file</string>
+    <string name="storage_file_subtitle">Save lyrics as .lrc / .txt file in the same folder as the audio file.</string>
+    <string name="storage_embed_title">Embed lyrics in audio file</string>
+    <string name="storage_embed_subtitle">Embed lyrics directly into the audio file tags.</string>
+    <string name="storage_fix_meta_title">Update track metadata</string>
+    <string name="storage_fix_meta_subtitle">Automatically update track title, artist, and album when saving lyrics.</string>
+    <string name="storage_embed_art_title">Embed cover art in audio file</string>
+    <string name="storage_embed_art_subtitle">Embed album cover directly into track tags (ID3v2.3 + ID3v1).</string>
+    <string name="storage_copy_art_title">Save cover art copy to album folder</string>
+    <string name="storage_copy_art_subtitle">Download 1 artwork image file into the destination folder when tagging.</string>
+    <string name="storage_art_filename_label">Artwork filename in album folder</string>
+    <string name="storage_poweramp_folders">Music folders from Poweramp</string>
+    <string name="storage_custom_folders">Custom selected folders</string>
+    <string name="storage_folders_empty">No folders added yet. Tap + to select a folder.</string>
+
+    <!-- Lyrics Provider Settings -->
+    <string name="provider_lrclib_header">LrcLib API URLs</string>
+    <string name="provider_lrclib_info">Add custom LrcLib-compatible server endpoints. Only LrcLib-compatible APIs are supported due to response format differences.</string>
+    <string name="provider_default_chip">Default API (%1$s)</string>
+    <string name="provider_add_url_label">Add new API URL</string>
+    <string name="provider_active_title">Active LrcLib API</string>
+    <string name="provider_active_subtitle">This server API will be used for all future lyrics requests.</string>
+
+    <!-- Lyrics Editor Settings -->
+    <string name="editor_ai_info">Add your own API key to use AI editing features. Your key is stored locally on your device and is never collected or shared.</string>
+    <string name="editor_api_key_label">API Key</string>
+    <string name="editor_selected_model">Selected model</string>
+    <string name="editor_step_title">Timestamp adjustment step</string>
+    <string name="editor_step_subtitle">Time offset applied each time you tap + or - in the editor.</string>
+
+    <!-- Filter Settings -->
+    <string name="filter_info">These words will be removed from their respective fields during processing. Case-insensitive. Regex supported.</string>
+    <string name="filter_title_label">Title filter</string>
+    <string name="filter_artist_label">Artist filter</string>
+    <string name="filter_album_label">Album filter</string>
+</resources>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LyricsEmbedder</string>
+    <string name="tab_metadata">メタデータ</string>
+    <string name="tab_lyrics">歌詞を追加</string>
+    <string name="menu_about">このアプリについて</string>
+    <string name="menu_settings">設定</string>
+    <string name="action_close">閉じる</string>
+    <string name="action_back">戻る</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="action_save">保存</string>
+    <string name="action_apply">適用</string>
+    <string name="action_find">検索</string>
+    <string name="action_refresh">更新</string>
+    <string name="action_add">追加</string>
+    <string name="action_delete">削除</string>
+
+    <!-- About -->
+    <string name="about_title">LyricsEmbedder について</string>
+    <string name="about_body">LyricsEmbedder v1.0.0\n\nスマートフォンおよびタブレット対応の Android アプリ（Material You、Android 5.0 以降対応）です。MusicBrainz と Cover Art Archive からアルバムのメタデータとアートワークを取得して音声ファイル（MP3、FLAC、M4A、OGG、WAV、OPUS など）へ直接埋め込み、LrcLib から同期・通常歌詞を取得して Poweramp とも連携できます。</string>
+
+    <!-- Metadata Tab -->
+    <string name="metadata_folders_title">音楽フォルダ</string>
+    <string name="metadata_folders_subtitle">タグ埋め込み対応の音声ファイルのみをスキャンします（FLAC、MP3、M4A、OGG、WAV など）</string>
+    <string name="metadata_pick_folder">フォルダを選択</string>
+    <string name="metadata_empty_title">音楽フォルダが選択されていません</string>
+    <string name="metadata_empty_subtitle">「フォルダを選択」をタップするか、設定 &gt; 歌詞の保存設定からフォルダを追加してください。</string>
+    <string name="metadata_tablet_placeholder">左側のフォルダを選択すると、音声ファイル一覧とメタデータ設定が表示されます。</string>
+    <string name="metadata_tracks_count">%1$d 曲</string>
+    <string name="metadata_folder_detail_subtitle">%1$d 件の音声ファイル • %2$s</string>
+    <string name="metadata_source_poweramp">Poweramp</string>
+    <string name="metadata_source_custom">カスタム</string>
+    <string name="metadata_set_folder">このフォルダにメタデータを設定</string>
+    <string name="metadata_set_file">この音楽ファイルにメタデータを設定</string>
+    <string name="metadata_set_short">メタデータ設定</string>
+    <string name="metadata_edit_album">アルバム編集</string>
+    <string name="metadata_no_album">アルバムなし</string>
+    <string name="metadata_no_metadata_file">メタデータ未設定 • %1$s</string>
+    <string name="metadata_edit_album_dialog_title">アルバムメタデータを編集して全曲に適用</string>
+    <string name="metadata_apply_album_btn">アルバムに適用</string>
+    <string name="metadata_mb_results">MusicBrainz の検索結果 (%1$d)</string>
+    <string name="metadata_mapping_header">トラックのマッピング — 出力先フォルダにアートワーク画像も1枚保存されます</string>
+
+    <!-- Lyrics Tab -->
+    <string name="lyrics_filter_missing">歌詞なし (%1$d)</string>
+    <string name="lyrics_filter_has">歌詞あり (%1$d)</string>
+    <string name="lyrics_filter_no_meta">メタデータなし (%1$d)</string>
+    <string name="lyrics_select_all_missing">歌詞なしの曲をすべて選択</string>
+    <string name="lyrics_clear_selection">選択解除 (%1$d)</string>
+    <string name="lyrics_no_meta_warning">メタデータがないファイルは歌詞を取得できません。先にメタデータタブでタグを設定してください。</string>
+    <string name="lyrics_empty_list">このカテゴリに該当する曲はありません。</string>
+    <string name="lyrics_sheet_downloading">歌詞をダウンロード中: %1$d/%2$d</string>
+    <string name="lyrics_sheet_progress">ダウンロード進捗 (%1$d/%2$d)</string>
+    <string name="lyrics_sheet_idle">歌詞をダウンロード (%1$d 曲選択中)</string>
+    <string name="lyrics_sheet_hint">上にスワイプして曲を選択または詳細進捗を表示</string>
+    <string name="lyrics_btn_download">ダウンロード</string>
+    <string name="lyrics_btn_stop">停止</string>
+    <string name="lyrics_sheet_details_title">ダウンロード進捗の詳細</string>
+    <string name="lyrics_sheet_quick_pick">歌詞のない曲をすばやく選択</string>
+    <string name="lyrics_select_all">すべて選択</string>
+
+    <!-- Lyrics Editor -->
+    <string name="editor_title">歌詞エディタ</string>
+    <string name="editor_timestamp_shift">タイムスタンプ調整 (±%1$dms)</string>
+    <string name="editor_placeholder">歌詞テキスト（同期 LRC [mm:ss.xx] に対応）</string>
+    <string name="editor_ai_title">AI 歌詞アシスタント</string>
+    <string name="editor_ai_instruction_label">指示内容</string>
+    <string name="editor_ai_default_instruction">LRC のタイムスタンプを保持したまま、誤字脱字や表記を整えてください。</string>
+    <string name="editor_ai_run">AI を実行</string>
+
+    <!-- Settings Main -->
+    <string name="settings_title">設定</string>
+    <string name="settings_theme_title">テーマと言語</string>
+    <string name="settings_theme_subtitle">アプリの外観と表示言語をカスタマイズ</string>
+    <string name="settings_request_title">歌詞リクエスト</string>
+    <string name="settings_request_subtitle">Poweramp からの歌詞リクエストの処理方法を設定</string>
+    <string name="settings_storage_title">歌詞の保存設定</string>
+    <string name="settings_storage_subtitle">歌詞ファイルやアートワークの保存先と保存方法を管理</string>
+    <string name="settings_provider_title">歌詞プロバイダー</string>
+    <string name="settings_provider_subtitle">歌詞取得元の API を設定</string>
+    <string name="settings_editor_title">歌詞エディタ</string>
+    <string name="settings_editor_subtitle">AI プロバイダーとタイムスタンプ調整幅をカスタマイズ</string>
+    <string name="settings_filter_title">フィルター</string>
+    <string name="settings_filter_subtitle">処理時に対応するフィールドから削除される語句を設定します。大文字・小文字を区別せず、正規表現に対応します。</string>
+
+    <!-- Theme & Language Settings -->
+    <string name="theme_mode_header">表示モード</string>
+    <string name="theme_system">システムに従う</string>
+    <string name="theme_light">ライトモード</string>
+    <string name="theme_dark">ダークモード</string>
+    <string name="theme_dynamic_title">Material You ダイナミックカラー</string>
+    <string name="theme_dynamic_desc_supported">壁紙に合わせて配色を自動調整します（Android 12 以降）。</string>
+    <string name="theme_dynamic_desc_unsupported">Android 12 以降で利用可能です。現在はデフォルトの Material 3 配色を使用しています。</string>
+    <string name="language_header">アプリ言語</string>
+    <string name="language_system">システムに従う</string>
+    <string name="language_en">English</string>
+    <string name="language_vi">Tiếng Việt</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Lyrics Request Settings -->
+    <string name="req_extended_title">拡張検索を使用</string>
+    <string name="req_extended_subtitle">完全一致する歌詞が見つからない場合、より広い検索を実行します。注意: 不正確な歌詞が返される場合があります。</string>
+    <string name="req_notify_fail_title">歌詞リクエスト失敗時に通知</string>
+    <string name="req_notify_fail_subtitle">バックグラウンドでの歌詞取得が失敗したときに通知を受け取ります。</string>
+    <string name="req_replace_notif_title">以前の通知を置き換える</string>
+    <string name="req_replace_notif_subtitle">古い通知を削除し、最新の通知のみを表示します。</string>
+    <string name="req_preferred_type_title">優先する歌詞の種類</string>
+    <string name="req_preferred_type_subtitle">同期歌詞または通常テキスト歌詞のデフォルト設定を選択します。</string>
+    <string name="req_type_synced">同期済み (Sync)</string>
+    <string name="req_type_text_only">テキストのみ (Text-only)</string>
+    <string name="req_instrumental_title">インストゥルメンタル曲をマーク</string>
+    <string name="req_instrumental_subtitle">歌詞のない曲をインストゥルメンタルとしてマークし、Poweramp が再度要求しないようにします。</string>
+
+    <!-- Lyrics Storage Settings -->
+    <string name="storage_poweramp_title">Poweramp に歌詞を送信</string>
+    <string name="storage_poweramp_subtitle">歌詞を Poweramp のキャッシュに保存し、Poweramp 画面から即座に反映します。</string>
+    <string name="storage_file_title">歌詞をファイルとして保存</string>
+    <string name="storage_file_subtitle">音楽ファイルと同じフォルダに .lrc / .txt ファイルとして保存します。</string>
+    <string name="storage_embed_title">歌詞を音楽ファイルに埋め込む</string>
+    <string name="storage_embed_subtitle">歌詞を音声ファイルのタグへ直接埋め込みます。</string>
+    <string name="storage_fix_meta_title">曲のメタデータを更新</string>
+    <string name="storage_fix_meta_subtitle">歌詞保存時に曲名・アーティスト・アルバム名を自動で更新します。</string>
+    <string name="storage_embed_art_title">アートワークを音楽ファイルに埋め込む</string>
+    <string name="storage_embed_art_subtitle">アルバムアートワークを各曲のタグに直接埋め込みます（ID3v2.3 + ID3v1）。</string>
+    <string name="storage_copy_art_title">アートワークのコピーをフォルダに保存</string>
+    <string name="storage_copy_art_subtitle">メタデータ設定時に出力先フォルダへアートワーク画像を1枚保存します。</string>
+    <string name="storage_art_filename_label">フォルダ内に保存するアートワークファイル名</string>
+    <string name="storage_poweramp_folders">Poweramp の音楽フォルダ</string>
+    <string name="storage_custom_folders">選択したカスタムフォルダ</string>
+    <string name="storage_folders_empty">フォルダがありません。+ ボタンから追加してください。</string>
+
+    <!-- Lyrics Provider Settings -->
+    <string name="provider_lrclib_header">LrcLib API URL</string>
+    <string name="provider_lrclib_info">カスタムの LrcLib 互換エンドポイントを追加できます。レスポンス形式の違いにより、LrcLib 互換 API のみ対応しています。</string>
+    <string name="provider_default_chip">デフォルト API (%1$s)</string>
+    <string name="provider_add_url_label">新しい API URL を追加</string>
+    <string name="provider_active_title">使用中の LrcLib API</string>
+    <string name="provider_active_subtitle">今後のすべての歌詞リクエストにこのサーバー API が使用されます。</string>
+
+    <!-- Lyrics Editor Settings -->
+    <string name="editor_ai_info">AI 機能を使用するにはご自身の API キーを設定してください。キーは端末内にのみ保存され、収集・共有されることはありません。</string>
+    <string name="editor_api_key_label">API キー</string>
+    <string name="editor_selected_model">選択中のモデル</string>
+    <string name="editor_step_title">タイムスタンプ調整ステップ</string>
+    <string name="editor_step_subtitle">+ または - ボタンを1回押したときに移動する時間間隔です。</string>
+
+    <!-- Filter Settings -->
+    <string name="filter_info">これらの語句は処理時に対応するフィールドから削除されます。大文字・小文字を区別せず、正規表現に対応しています。</string>
+    <string name="filter_title_label">タイトルフィルター</string>
+    <string name="filter_artist_label">アーティストフィルター</string>
+    <string name="filter_album_label">アルバムフィルター</string>
+</resources>
