@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LyricsEmbedder</string>
+    <string name="menu_about">Giới thiệu</string>
+    <string name="menu_settings">Cài đặt</string>
+    <string name="tab_lyrics">Thêm Lyrics</string>
+    <string name="tab_metadata">Gắn Metadata</string>
+    <style name="Theme.LyricsEmbedder" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,10 @@
+R_DEF: Internal format may change without notice
+local
+string app_name
+string menu_about
+string menu_settings
+string tab_lyrics
+string tab_metadata
+style Theme.LyricsEmbedder
+xml backup_rules
+xml data_extraction_rules
